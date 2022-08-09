@@ -13,11 +13,11 @@ export const getCandidates = async (req, res) => {
 
 // upload candidate info
 export const uploadCandidate = async (req, res) => {
-    const { firstName, lastName, email, phone, skills, highestDegree,
-        major, school, experienceYhr, latestJobTitle, latestCompany, selectedResume } = req.body;
+    const { name, email, phone, skills, highestDegree,
+        major, school, experienceYr, latestJobTitle, latestCompany, selectedResume } = req.body;
 
-    const newCandidate = new CandidateInfo({ firstName,  lastName, email, phone, skills, highestDegree,
-        major, school, experienceYhr, latestJobTitle, latestCompany, selectedResume });
+    const newCandidate = new CandidateInfo({ name, email, phone, skills, highestDegree,
+        major, school, experienceYr, latestJobTitle, latestCompany, selectedResume });
 
     try {
         await newCandidate.save();
