@@ -2,7 +2,7 @@
 
 ## First Meeting on August 8:
 
-##  Tech Stack:  Reactjs, Nodejs, Expressjs, MongoDB
+#### Tech Stack:  Reactjs, Nodejs, Expressjs, MongoDB
 
 - Backend: Sihui (Ayleen), 
 - Frontend: Arbab, Wasiul, Ishan
