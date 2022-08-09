@@ -7,6 +7,7 @@ const candidateSchema = mongoose.Schema({
     email: String,
     phone: String,
     highestDegree: String,
+    experienceYhr: Number,
     major: String,
     school: String,
     latestJobTitle: String,
