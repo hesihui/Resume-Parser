@@ -1,5 +1,6 @@
 import CandidateInfo from "../model/candidatesInfo.js";
 import candidatesInfo from "../model/candidatesInfo.js";
+import mongoose from "mongoose";
 
 // get all the candidates
 export const getCandidates = async (req, res) => {
@@ -37,3 +38,19 @@ export const deleteCandidate = async (req, res) => {
     res.json({ message: "Candidate Info has been deleted successfully." });
 }
 
+export const getCandidateBySearch = async (req, res) => {
+    const { name, skills, experienceYrs } = req.query;
+
+    try {
+        const nameSearch = new RegExp(name, "i");
+        const exYr = Number(experienceYrs);
+        const candidates = await candidatesInfo.find({
+            $or: [{ nameSearch },
+                { experienceYr: {$gte: exYr} },
+                { skills: { $in: skills.split(',') }}]
+        })
+        res.json({ data: candidates });
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}
