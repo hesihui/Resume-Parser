@@ -1,10 +1,4 @@
-# Resume-Parser
-
-####  Tech Stack: MERN Stack
-
-
-
-# Backend APIs 
+# Backend APIs Doc
 
 ### Postman Test Collection: https://www.getpostman.com/collections/3df63eb9f6cc487fdbc7 
 
