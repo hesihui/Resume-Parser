@@ -1,6 +1,6 @@
 # Resume-Parser
 
-## Tech Stack: MERN Stack
+####  Tech Stack: MERN Stack
 
 
 
