@@ -3,15 +3,15 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import Container from '@mui/material/Container';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import { styled } from '@mui/system';
 import TextField from '@mui/material/TextField';
 import { Box } from '@mui/material';
 import MenuItem from "@mui/material/MenuItem";
-import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import FileBase from 'react-file-base64'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { uploadCandidate } from '../api/index';
 
 
@@ -21,7 +21,11 @@ export default function Form() {
         experienceYr: 0, major:'', school:'', latestJobTitle:'', latestCompany:'',
         selectedResume: ''
     })
+
+    const [experienceYr, setExperienceYr] = useState('');
+
     const [name, setName] = useState('');
+    const [highestDegree, setHighestDegree] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [company, setCompany] = useState('');
@@ -34,53 +38,41 @@ export default function Form() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setNameError(false);
-        setEmailError(false);
-        setPhoneError(false);
-
-        if (name === '') {
-            setNameError(true);
-        }
-        if (email === '') {
-            setEmailError(true);
-        }
-        if (phone === '') {
-            setPhoneError(true);
-        }
-
-        if (name && email && phone) {
-            console.log(name, email, phone, company, details, skills);
-        }
-
-        console.log(candidateData);
         try {
-            await uploadCandidate(candidateData);
+            const newData = await uploadCandidate(candidateData);
+            notifySuccess();
+            clear();
         } catch (error) {
+            notifyFailure();
             console.log(error);
         }
     }
 
-    const Degrees = [
-        'BA',
-        'BS',
-        'MA',
-        'MS',
-        'PhD'
-    ];
+    const notifySuccess = () => toast("Candidate Profile Successfully Uploaded!");
+    const notifyFailure = () => toast.error("Error Occurred During Uploading...");
+
+    const clear = () => {
+        setExperienceYr('');
+        setCandidateData({
+            name: '', skills: '', email: '', phone: '', highestDegree: '',
+            experienceYr: 0, major:'', school:'', latestJobTitle:'', latestCompany:'',
+            selectedResume: ''
+        });
+    }
 
   return (
     <Container>
-        <Typography 
-            variant="h5" 
+        <Typography
+            variant="h5"
             color='textSecondary'
             component='h2'
             align='center'
             margin={5}
             gutterBottom
-        > 
+        >
             Please fill in your information below
         </Typography>
-
+        <ToastContainer />
         <form noValidate autoComplete="off" onSubmit={handleSubmit}>
             <TextField
                 label="Full Name"
@@ -89,7 +81,7 @@ export default function Form() {
                 margin='normal'
                 fullWidth
                 required
-                error={nameError}
+                value={candidateData.name}
                 onChange={(e) =>
                     setCandidateData({...candidateData, name: e.target.value})}
             />
@@ -100,7 +92,7 @@ export default function Form() {
                 margin='normal'
                 fullWidth
                 required
-                error={emailError}
+                value={candidateData.email}
                 onChange={(e) =>
                     setCandidateData({...candidateData, email: e.target.value})}
             />
@@ -111,7 +103,7 @@ export default function Form() {
                 margin='normal'
                 fullWidth
                 required
-                error={phoneError}
+                value={candidateData.phone}
                 onChange={(e) =>
                     setCandidateData({...candidateData, phone: e.target.value})}
             />
@@ -121,6 +113,7 @@ export default function Form() {
                 color='secondary'
                 margin='normal'
                 fullWidth
+                value={candidateData.latestCompany}
                 onChange={(e) =>
                     setCandidateData({...candidateData, latestCompany: e.target.value})}
             />
@@ -130,24 +123,30 @@ export default function Form() {
                 color='secondary'
                 margin='normal'
                 fullWidth
+                value={candidateData.latestJobTitle}
                 onChange={(e) =>
                     setCandidateData({...candidateData, latestJobTitle: e.target.value})}
             />
             <TextField
-                label="Total Experience Years"
+                label="Total Experience Years - Only Input Number"
                 variant="outlined"
                 color='secondary'
                 margin='normal'
                 fullWidth
-                onChange={(e) =>
-                    setCandidateData({...candidateData, experienceYr: Number(e.target.value)})}
+                value={experienceYr}
+                onChange={(e) => {
+                    setExperienceYr(e.target.value)
+                    setCandidateData({...candidateData, experienceYr: Number(e.target.value)})
+                }}
             />
             <FormControl fullWidth variant="outlined" margin='normal'>
                 <InputLabel id="demo-simple-select-label">Highest Degree</InputLabel>
                 <Select
+                    value={ candidateData.highestDegree }
                     label="Age"
-                    onChange={(e) =>
-                        setCandidateData({...candidateData, highestDegree: e.target.value})}
+                    onChange={(e) => {
+                        setCandidateData({...candidateData, highestDegree: e.target.value})
+                    }}
                 >
                     <MenuItem value={'BA'}>BA</MenuItem>
                     <MenuItem value={'BS'}>BS</MenuItem>
@@ -162,6 +161,7 @@ export default function Form() {
                 color='secondary'
                 margin='normal'
                 fullWidth
+                value={candidateData.major}
                 onChange={(e) =>
                     setCandidateData({...candidateData, major: e.target.value})}
             />
@@ -171,6 +171,7 @@ export default function Form() {
                 color='secondary'
                 margin='normal'
                 fullWidth
+                value={candidateData.school}
                 onChange={(e) =>
                     setCandidateData({...candidateData, school: e.target.value})}
             />
@@ -182,6 +183,7 @@ export default function Form() {
                 multiline
                 rows={4}
                 fullWidth
+                value={candidateData.skills}
                 onChange={(e) =>
                     setCandidateData({...candidateData, skills: e.target.value.split(',')})}
             />
