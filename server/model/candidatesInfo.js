@@ -1,13 +1,12 @@
 import mongoose from 'mongoose';
 
 const candidateSchema = mongoose.Schema({
-    firstName: String,
-    lastName: String,
+    name: String,
     skills: [String],
     email: String,
     phone: String,
     highestDegree: String,
-    experienceYhr: Number,
+    experienceYr: Number,
     major: String,
     school: String,
     latestJobTitle: String,
