@@ -59,3 +59,31 @@
 
 #### Seach API: Search Candidate by Name, Skills, or Experience Years: GET http://localhost:5000/candidates/search?name=none&skills=1,2&experienceYrs=4
 
+response body example:
+
+```json
+{
+    "data": [
+        {
+            "skills": [
+                "1",
+                "2"
+            ],
+            "createdAt": "2022-08-09T22:43:18.829Z",
+            "_id": "62f2e30cf52819cc063a85af",
+            "name": " John Test",
+            "email": "123@gmail.com",
+            "phone": "123456789",
+            "highestDegree": "BS",
+            "major": "Computer Science",
+            "school": "Test University",
+            "experienceYr": 5,
+            "latestJobTitle": "Software Engineer",
+            "latestCompany": "AAAA Inc.",
+            "selectedResume": "data:application/pdf;base64,<base 64 PDF code>",
+            "__v": 0
+        }
+    ]
+}
+```
+
