@@ -61,8 +61,8 @@ const Post = ({ candidate,  setCandidates }) => {
       <Typography variant="h3" color="textSecondary" component="h2">Name: {candidate.name}</Typography>
       <Typography variant="h5" color="textSecondary"> {candidate.latestJobTitle} @ {candidate.latestCompany}</Typography>
 
-      <Typography variant="body1" color="textSecondary" component="h2">Phone: {candidate.phone} Email: {candidate.email}</Typography>
-      <Typography variant="body1" color="textSecondary" component="h2">Degree: {candidate.highestDegree}
+      <Typography variant="body1" color="textSecondary" component="h2">Phone: {candidate.phone} &nbsp; Email: {candidate.email}</Typography>
+      <Typography variant="body1" color="textSecondary" component="h2">Degree: {candidate.highestDegree} &nbsp;
         Major: {candidate.major}</Typography>
       <Typography variant="body1" color="textSecondary"> School: {candidate.school}</Typography>
       <Typography variant="body1" color="textSecondary"> Experience Years: {candidate.experienceYr}</Typography>
