@@ -18,8 +18,8 @@ Next Meeting Time: Wed 6 PM EST
 ##  Second Meeting on Aug 10:
 
 - Meeting:
-  - UI/UX Demostration 
-  - Form Functioanlity on Client Side Completed and Demo
-  - Backend services completed 
+  - Urja: UI/UX Demostration 
+  - Ayleen & Ishan: Form Functioanlity on Client Side Completed and Demo
+  - Ayleen: Backend services completed 
 
 Next Meeting Time: Friday  6 PM EST

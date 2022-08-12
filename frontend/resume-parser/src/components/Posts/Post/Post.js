@@ -1,59 +1,60 @@
 import React from 'react';
-import { Card, CardActions, CardContent, CardMedia, Button, Typography } from '@mui/material';
+import { Card, CardActions, CardContent, CardMedia, Button, Typography, Modal, Box } from '@mui/material';
 
-const Post = ({ post, setCurrentId }) => {
+const Post = ({ candidate }) => {
+  // console.log("candidate", candidate);
+
+  function base64toBlob(data) {
+    const base64Data = data.substr('data:application/pdf;base64,'.length);
+    const sliceSize = 1024;
+    const byteCharacters = atob(base64Data);
+    const bytesLength = byteCharacters.length;
+    const slicesCount = Math.ceil(bytesLength / sliceSize);
+    const byteArrays = new Array(slicesCount);
+
+    for (let sliceIndex = 0; sliceIndex < slicesCount; ++sliceIndex) {
+      const begin = sliceIndex * sliceSize;
+      const end = Math.min(begin + sliceSize, bytesLength);
+
+      const bytes = new Array(end - begin);
+      for (let offset = begin, i = 0; offset < end; ++i, ++offset) {
+        bytes[i] = byteCharacters[offset].charCodeAt(0);
+      }
+      byteArrays[sliceIndex] = new Uint8Array(bytes);
+    }
+    return new Blob(byteArrays, { type: "application/pdf" });
+  }
+
+
+  function openBase64NewTab(base64Pdf) {
+    let blob = base64toBlob(base64Pdf);
+    if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+      window.navigator.msSaveOrOpenBlob(blob, "pdfBase64.pdf");
+    } else {
+      const blobUrl = URL.createObjectURL(blob);
+      window.open(blobUrl);
+    }
+  }
 
   return (
     <Card 
         display='flex'
         flexDirection='column'
         justifyContent='space-between'
-        borderRadius='15px'
         height='100%'
         position='relative'
+        margin="10px"
     >
-      <CardMedia 
-        height='0'
-        paddingTop='56.25%'
-        backgroundColor='rgba(0, 0, 0, 0.5)'
-        backgroundBlendMode='darken'
-        /*image={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} */
-        title='candidate' />
-      <div 
-        position='absolute'
-        top='20px'
-        left='20px'
-        color='white'
-    >
-        <Typography variant="h6">creator</Typography>
-      </div>
-      <div 
-        position='absolute'
-        top='20px'
-        right='20px'
-        color='white'
-      >
-        <Button style={{ color: 'white' }} size="small" onClick={() => setCurrentId(post._id)}></Button>
-      </div>
-      <div 
-        display='flex'
-        justifyContent='space-between'
-        margin='20px'
-      >
-        <Typography variant="body2" color="textSecondary" component="h2"></Typography>
-      </div>
-      <Typography padding='0 16px' gutterBottom variant="h5" component="h2">Candidate</Typography>
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">message</Typography>
-      </CardContent>
-      <CardActions 
-        padding='0 16px 8px 16px'
-        display='flex'
-        justifyContent='space-between'
-      >
-        <Button size="small" color="primary" /*onClick={() => dispatch(likePost(post._id))}*/></Button>
-        <Button size="small" color="primary" /*onClick={() => dispatch(deletePost(post._id))}*/> Delete</Button>
-      </CardActions>
+      <Typography variant="h3" color="textSecondary" component="h2">Name: {candidate.name}</Typography>
+      <Typography variant="h5" color="textSecondary"> {candidate.latestJobTitle} @ {candidate.latestCompany}</Typography>
+
+      <Typography variant="body1" color="textSecondary" component="h2">Phone: {candidate.phone} Email: {candidate.email}</Typography>
+      <Typography variant="body1" color="textSecondary" component="h2">Degree: {candidate.highestDegree}
+        Major: {candidate.major}</Typography>
+      <Typography variant="body1" color="textSecondary"> School: {candidate.school}</Typography>
+      <Typography variant="body1" color="textSecondary"> Experience Years: {candidate.experienceYr}</Typography>
+      <Typography variant="body1" color="textSecondary"> Skills: {candidate.skills.join(', ')}</Typography>
+      <Button onClick={() => openBase64NewTab(candidate.selectedResume) }>Show Resume </Button>
     </Card>
   );
 };

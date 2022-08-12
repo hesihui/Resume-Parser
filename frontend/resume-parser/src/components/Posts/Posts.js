@@ -1,10 +1,11 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Post from "./Post/Post";
 import { Grid } from '@mui/material';
 
-const Posts = () => {
+const Posts = ({candidates}) => {
+    // console.log(candidates);
+
     return (
-        
             <Grid 
                 marginTop='1px'
                 display='flex'
@@ -12,11 +13,14 @@ const Posts = () => {
                 container
                 spacing={10}>
                 <Grid item xs={12} sm={6} md={6}>
-                  <Post />
-                  <Post />
-                  <Post />
+                    {
+                        candidates.map(
+                            (candidate, index) =>
+                                (<Post candidate={candidate} key={index}/>)
+
+                        )
+                    }
                 </Grid>
-            
             </Grid>
           
         );
