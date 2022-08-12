@@ -101,7 +101,7 @@ const Dashboard = () => {
                         </Button>
                 </Box>
             </form>
-            <Posts candidates={candidates}/>
+            <Posts candidates={candidates}  setCandidates={setCandidates}/>
         </div>
     );
 }

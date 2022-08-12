@@ -1,7 +1,8 @@
 import React from 'react';
 import { Card, CardActions, CardContent, CardMedia, Button, Typography, Modal, Box } from '@mui/material';
+import axios from "axios";
 
-const Post = ({ candidate }) => {
+const Post = ({ candidate,  setCandidates }) => {
   // console.log("candidate", candidate);
 
   function base64toBlob(data) {
@@ -36,6 +37,18 @@ const Post = ({ candidate }) => {
     }
   }
 
+  const handleDelete= (id) => {
+    const deleteCandidate = async (id) => {
+      try {
+        const response = await axios.delete(`http://localhost:5000/candidates/${id}`);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    deleteCandidate(id);
+    window.location.reload();
+  }
+
   return (
     <Card 
         display='flex'
@@ -55,6 +68,7 @@ const Post = ({ candidate }) => {
       <Typography variant="body1" color="textSecondary"> Experience Years: {candidate.experienceYr}</Typography>
       <Typography variant="body1" color="textSecondary"> Skills: {candidate.skills.join(', ')}</Typography>
       <Button onClick={() => openBase64NewTab(candidate.selectedResume) }>Show Resume </Button>
+      <Button onClick={() => handleDelete(candidate._id) }>Delete Candidate</Button>
     </Card>
   );
 };
