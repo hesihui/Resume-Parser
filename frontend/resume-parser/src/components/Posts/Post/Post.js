@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, CardActions, CardContent, CardMedia, Button, Typography, Modal, Box } from '@mui/material';
 import axios from "axios";
 
-const Post = ({ candidate,  setCandidates }) => {
+const Post = ({ candidate }) => {
   // console.log("candidate", candidate);
 
   function base64toBlob(data) {

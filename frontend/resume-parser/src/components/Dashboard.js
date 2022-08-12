@@ -38,7 +38,7 @@ const Dashboard = () => {
         e.preventDefault();
         const getCandidatesBySearch = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/candidates/search?name=${searchQuery.name || 'none'}&skills=${search.skills}&experienceYrs=${search.experienceYrs}`);
+                const response = await axios.get(`http://localhost:5000/candidates/search?name=${search.name || 'none'}&skills=${search.skills}&experienceYrs=${search.experienceYrs}`);
                 console.log(response.data);
                 const {data} = response.data;
                 setCandidates(data);
@@ -101,7 +101,7 @@ const Dashboard = () => {
                         </Button>
                 </Box>
             </form>
-            <Posts candidates={candidates}  setCandidates={setCandidates}/>
+            <Posts candidates={candidates} />
         </div>
     );
 }

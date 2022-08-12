@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import Post from "./Post/Post";
 import { Grid } from '@mui/material';
 
-const Posts = ({candidates, setCandidates}) => {
+const Posts = ({candidates}) => {
     // console.log(candidates);
 
     return (
@@ -16,7 +16,7 @@ const Posts = ({candidates, setCandidates}) => {
                     {
                         candidates.map(
                             (candidate, index) =>
-                                (<Post candidate={candidate} setCandidates={ setCandidates} key={index}/>)
+                                (<Post candidate={candidate} key={index}/>)
 
                         )
                     }
