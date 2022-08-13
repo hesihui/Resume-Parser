@@ -6,7 +6,7 @@ import Posts from './Posts/Posts';
 import {fetchCandidates} from "../api";
 import Button from "@mui/material/Button";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-
+import { styled } from '@mui/system';
 
 const Dashboard = () => {
     const searchQuery = {
@@ -50,6 +50,20 @@ const Dashboard = () => {
         };
         getCandidatesBySearch();
     }
+
+    const StatWrapper = styled('div')(
+        ({ theme }) => `
+          min-width: 300px;
+        `,
+            );
+
+    const MyComponent = styled('div')({
+        color: 'darkslategray',
+        backgroundColor: 'aliceblue',
+        padding: 8,
+        borderRadius: 4,
+    });
+
 
     return (
         <div>
