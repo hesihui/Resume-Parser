@@ -13,6 +13,9 @@ import FileBase from 'react-file-base64'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { uploadCandidate } from '../api/index';
+import './Form.css';
+
+
 
 
 export default function Form() {
@@ -75,6 +78,7 @@ export default function Form() {
         <ToastContainer />
         <form noValidate autoComplete="off" onSubmit={handleSubmit}>
             <TextField
+                className='full-name'
                 label="Full Name"
                 variant="outlined"
                 color='secondary'
@@ -86,6 +90,7 @@ export default function Form() {
                     setCandidateData({...candidateData, name: e.target.value})}
             />
             <TextField
+                className='email'
                 label="Email"
                 variant="outlined"
                 color='secondary'

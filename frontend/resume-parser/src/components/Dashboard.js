@@ -23,7 +23,7 @@ const Dashboard = () => {
     useEffect(() => {
         const getCandidates = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/candidates`);
+                const response = await axios.get(`http://localhost:8000/candidates`);
                 setCandidates(response.data);
             } catch (err) {
              console.log(err);
@@ -38,7 +38,7 @@ const Dashboard = () => {
         e.preventDefault();
         const getCandidatesBySearch = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/candidates/search?name=${search.name || 'none'}&skills=${search.skills}&experienceYrs=${search.experienceYrs}`);
+                const response = await axios.get(`http://localhost:8000/candidates/search?name=${search.name || 'none'}&skills=${search.skills}&experienceYrs=${search.experienceYrs}`);
                 console.log(response.data);
                 const {data} = response.data;
                 setCandidates(data);
@@ -59,8 +59,19 @@ const Dashboard = () => {
             {/*>*/}
             {/*</TextField>*/}
             <form noValidate autoComplete="off" onSubmit={handleSubmit}>
-                <Box textAlign='center' marginTop={1}>
+                <Box 
+                    sx={{
+                        margin: '40px',
+                    }}
+                textAlign='center' 
+                justifyContent="center"
+                marginTop={1}
+                alignItems="center">
+                    
                     <TextField
+                    sx={{
+                        margin: '10px',
+                    }}
                         label="Search By Name"
                         variant="outlined"
                         color='secondary'
@@ -71,6 +82,9 @@ const Dashboard = () => {
                         {setSearch({...searchQuery, name: e.target.value})} }
                     />
                     <TextField
+                    sx={{
+                        margin: '10px',
+                    }}
                         label="Search By Skills, Seperated Skills By Commas"
                         variant="outlined"
                         color='secondary'
@@ -81,6 +95,9 @@ const Dashboard = () => {
                         {setSearch({...searchQuery, skills: e.target.value})} }
                     />
                     <TextField
+                    sx={{
+                        margin: '10px',
+                    }}
                         label="Search By Experience Years"
                         variant="outlined"
                         color='secondary'
@@ -91,6 +108,10 @@ const Dashboard = () => {
                         {setSearch({...searchQuery, experienceYrs: e.target.value})} }
                     />
                         <Button
+                        sx={{
+                            maxWidth: '170px', maxHeight: '70px', minWidth: '170px', minHeight: '55px',
+                            marginTop: '10px', fontSize: '20px'
+                        }}
                             type="submit"
                             color='secondary'
                             variant="contained"
