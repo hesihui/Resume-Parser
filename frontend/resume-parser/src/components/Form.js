@@ -83,7 +83,7 @@ export default function Form() {
                     margin={5}
                     gutterBottom
                 >
-                    Please fill in your information below
+                    Please fill in your information below.
                 </Typography>
             </Box>
             <ToastContainer />
