@@ -2,7 +2,9 @@
 
 ####  Tech Stack: MERN Stack
 
+<img src="https://raw.githubusercontent.com/hesihui/Resume-Parser/main/demo_pic/demo1.png"      alt="demo1"/>
 
+<img src="https://raw.githubusercontent.com/hesihui/Resume-Parser/main/demo_pic/demo2.png"      alt="demo2"/>
 
 # Backend APIs 
 
