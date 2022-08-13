@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, CardActions, CardContent, CardMedia, Button, Typography, Modal, Box } from '@mui/material';
 import axios from "axios";
+import './styles.css'
 
 const Post = ({ candidate }) => {
   // console.log("candidate", candidate);
@@ -40,7 +41,7 @@ const Post = ({ candidate }) => {
   const handleDelete= (id) => {
     const deleteCandidate = async (id) => {
       try {
-        const response = await axios.delete(`http://localhost:5000/candidates/${id}`);
+        const response = await axios.delete(`http://localhost:8000/candidates/${id}`);
       } catch (err) {
         console.log(err);
       }
@@ -50,15 +51,26 @@ const Post = ({ candidate }) => {
   }
 
   return (
-    <Card 
+    <Card
+      style={{
+        margin: '30px',
+        boxShadow: '0px 0px 20px 0px rgba(0,0,0,0.25)',
+        borderRadius: '25px',
+        
+      }}
         display='flex'
         flexDirection='column'
         justifyContent='space-between'
         height='100%'
         position='relative'
         margin="10px"
-    >
-      <Typography variant="h3" color="textSecondary" component="h2">Name: {candidate.name}</Typography>
+    > 
+      <Box 
+        sx={{margin: '30px'}}
+          
+        >
+      
+      <Typography sx={{textAlign: 'center'}} variant="h3" color="textSecondary" component="h2">Name: {candidate.name}</Typography>
       <Typography variant="h5" color="textSecondary"> {candidate.latestJobTitle} @ {candidate.latestCompany}</Typography>
 
       <Typography variant="body1" color="textSecondary" component="h2">Phone: {candidate.phone} &nbsp; Email: {candidate.email}</Typography>
@@ -67,8 +79,11 @@ const Post = ({ candidate }) => {
       <Typography variant="body1" color="textSecondary"> School: {candidate.school}</Typography>
       <Typography variant="body1" color="textSecondary"> Experience Years: {candidate.experienceYr}</Typography>
       <Typography variant="body1" color="textSecondary"> Skills: {candidate.skills.join(', ')}</Typography>
-      <Button onClick={() => openBase64NewTab(candidate.selectedResume) }>Show Resume </Button>
-      <Button onClick={() => handleDelete(candidate._id) }>Delete Candidate</Button>
+      <Box textAlign='center'>
+      <Button sx={{ marginTop: '20px' }} variant='contained' onClick={() => openBase64NewTab(candidate.selectedResume) }>Show Resume </Button>
+      <Button sx={{ marginTop: '10px' }} variant='outlined' onClick={() => handleDelete(candidate._id) }>Delete Candidate</Button>
+      </Box>
+      </Box>
     </Card>
   );
 };
